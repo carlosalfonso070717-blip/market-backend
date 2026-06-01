@@ -2,6 +2,8 @@ package mx.edtecdesoftware.edu.mx.demo.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "clientes")
 public class Cliente {
@@ -24,6 +26,11 @@ public class Cliente {
 
     @Column(name = "correo_electronico", length = 70)
     private String correoElectronico;
+
+    // Un cliente puede tener muchas compras
+    @OneToMany(mappedBy = "cliente")
+    private List<Compra> compras;
+
 
     public String getId() {
         return id;

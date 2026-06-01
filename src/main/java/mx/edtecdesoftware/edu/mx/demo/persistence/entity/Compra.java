@@ -3,6 +3,7 @@ package mx.edtecdesoftware.edu.mx.demo.persistence.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "compras")
@@ -22,6 +23,18 @@ public class Compra {
 
     private String comentario;
     private String estado;
+
+    // Relación con cliente:
+    // Muchas compras para un cliente
+    @ManyToOne
+    @JoinColumn(name = "id_cliente",
+            insertable = false, updatable = false)
+    private Cliente cliente;
+
+    // Una compra tiene muchos productos
+    @OneToMany(mappedBy = "compra")
+    private List<CompraProducto> productos;
+
 
     public Integer getIdCompra() {
         return idCompra;
