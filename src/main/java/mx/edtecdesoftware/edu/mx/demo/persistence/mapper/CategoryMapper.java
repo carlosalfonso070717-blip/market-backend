@@ -1,6 +1,6 @@
 package mx.edtecdesoftware.edu.mx.demo.persistence.mapper;
 
-import mx.edtecdesoftware.edu.mx.demo.domain.Category;
+import mx.edtecdesoftware.edu.mx.demo.domain.service.Category;
 import mx.edtecdesoftware.edu.mx.demo.persistence.entity.Categoria;
 import org.mapstruct.*;
 

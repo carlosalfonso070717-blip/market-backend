@@ -1,6 +1,6 @@
 package mx.edtecdesoftware.edu.mx.demo.persistence.mapper;
 
-import mx.edtecdesoftware.edu.mx.demo.domain.Product;
+import mx.edtecdesoftware.edu.mx.demo.domain.service.Product;
 import mx.edtecdesoftware.edu.mx.demo.persistence.entity.Producto;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

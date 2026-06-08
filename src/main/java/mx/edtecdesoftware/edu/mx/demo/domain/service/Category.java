@@ -1,4 +1,4 @@
-package mx.edtecdesoftware.edu.mx.demo.domain;
+package mx.edtecdesoftware.edu.mx.demo.domain.service;
 
 public class Category {
 
