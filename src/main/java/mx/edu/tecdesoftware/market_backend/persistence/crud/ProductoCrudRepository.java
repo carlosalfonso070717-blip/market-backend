@@ -23,5 +23,5 @@ public interface ProductoCrudRepository<Producto> extends CrudRepository<Product
     Optional<List<Producto>> findByCantidadStockLessThanAndEstado(int cantidad,boolean estado);
 
 
-
+    List<mx.edtecdesoftware.edu.mx.demo.persistence.entity.Producto> findByIdCategoriaOrderByNombreAsc(int attr0);
 }
