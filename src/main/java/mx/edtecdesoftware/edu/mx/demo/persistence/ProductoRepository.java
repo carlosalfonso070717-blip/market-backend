@@ -2,7 +2,7 @@ package mx.edtecdesoftware.edu.mx.demo.persistence;
 
 import mx.edu.tecdesoftware.market_backend.domain.repository.ProductRepository;
 import mx.edtecdesoftware.edu.mx.demo.domain.service.Product;
-import mx.edu.tecdesoftware.market_backend.persistence.crud.ProductoCrudRepository;
+import mx.edtecdesoftware.edu.mx.demo.persistence.crud.ProductoCrudRepository;
 import mx.edtecdesoftware.edu.mx.demo.persistence.entity.Producto;
 import mx.edtecdesoftware.edu.mx.demo.persistence.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
