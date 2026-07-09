@@ -1,0 +1,44 @@
+### Petición 1: Obtener todas las compras (Debe devolver 200 OK)
+GET http://localhost:8080/purchases/all
+Accept: application/json
+
+###
+
+### Petición 2: Filtrar por un cliente que no existe (Debe devolver 404 NOT FOUND)
+GET http://localhost:8080/purchases/client/CLIENTE_FANTASMA
+Accept: application/json
+
+###
+
+### Petición 3: Guardar una nueva compra (Debe devolver 201 CREATED y el purchaseId generado)
+# NOTA: Asegúrate de que los productos con ID 1 y 2 existan en tu base de datos antes de ejecutarla.
+POST http://localhost:8080/purchases/save
+Content-Type: application/json
+
+{
+  "clientId": "CLI-999",
+  "date": "2026-07-09T15:30:00",
+  "paymentMethod": "TARJETA",
+  "comment": "Compra de prueba desde IntelliJ HTTP Client",
+  "state": "PROCESADO",
+  "items": [
+    {
+      "productId": 1,
+      "quantity": 2,
+      "total": 150.00,
+      "active": true
+    },
+    {
+      "productId": 2,
+      "quantity": 5,
+      "total": 375.50,
+      "active": true
+    }
+  ]
+}
+
+###
+
+### Petición 4: Filtrar por el cliente creado (Debe devolver 200 OK con la compra que acabamos de guardar)
+GET http://localhost:8080/purchases/client/CLI-999
+Accept: application/json

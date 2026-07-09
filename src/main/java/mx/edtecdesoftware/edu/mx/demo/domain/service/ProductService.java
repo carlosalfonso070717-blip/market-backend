@@ -1,6 +1,6 @@
 package mx.edtecdesoftware.edu.mx.demo.domain.service;
 
-import mx.edu.tecdesoftware.market_backend.domain.repository.ProductRepository;
+import mx.edtecdesoftware.edu.mx.demo.domain.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
