@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Purchase {
-    private int purchaseId;
+    // CAMBIO CLAVE: Usar Integer en lugar de int
+    private Integer purchaseId;
     private String clientId;
     private LocalDateTime date;
     private String paymentMethod;
@@ -12,14 +13,13 @@ public class Purchase {
     private String state;
     private List<PurchaseItem> items;
 
-    public int getPurchaseId() {
+    public Integer getPurchaseId() {
         return purchaseId;
     }
-
-    public void setPurchaseId(int purchaseId) {
+    
+    public void setPurchaseId(Integer purchaseId) {
         this.purchaseId = purchaseId;
     }
-
     public String getClientId() {
         return clientId;
     }

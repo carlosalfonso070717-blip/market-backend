@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/purchases")
-
 public class PurchaseController {
+
     private final PurchaseService purchaseService;
 
     @Autowired
@@ -21,15 +22,19 @@ public class PurchaseController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Purchase>> getAll() {
-        return new ResponseEntity<>(purchaseService.getAll(), HttpStatus.OK);
+        List<Purchase> purchases = purchaseService.getAll();
+        if (purchases.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return new ResponseEntity<>(purchases, HttpStatus.OK);
     }
 
     @GetMapping("/client/{id}")
     public ResponseEntity<List<Purchase>> getByClient(@PathVariable("id") String clientId) {
         return purchaseService.getByClient(clientId)
                 .filter(purchases -> !purchases.isEmpty())
-                .map(purchases -> new ResponseEntity<>(purchases, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("/save")

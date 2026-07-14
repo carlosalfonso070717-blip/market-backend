@@ -1,11 +1,8 @@
 package mx.edtecdesoftware.edu.mx.demo.web.controller;
 
-import mx.edtecdesoftware.edu.mx.demo.domain.repository.ProductRepository;
 import mx.edtecdesoftware.edu.mx.demo.domain.service.Product;
 import mx.edtecdesoftware.edu.mx.demo.domain.service.ProductService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +16,15 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ProductRepository productRepository;
 
-    @GetMapping("")
+
+    @GetMapping
     public ResponseEntity<List<Product>> getAll(){
-        return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
+        List<Product> products = productService.getAll();
+        if (products.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -35,10 +35,18 @@ public class ProductController {
     }
 
     @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<Product>> getByCategory(@PathVariable("categoryId") int categoryId){
-        return productService.getByCategory(categoryId)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<List<Product>> getByCategory(@PathVariable("categoryId") int categoryId) {
+
+        Optional<List<Product>> productsOptional = productService.getByCategory(categoryId);
+        if (productsOptional.isPresent() && !productsOptional.get().isEmpty()) {
+            List<Product> products = productsOptional.get();
+            if (products.size() == 1 && products.getFirst() == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
@@ -47,11 +55,10 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") int productId){
+    public ResponseEntity<Void> delete(@PathVariable("id") int productId){
         if (productService.delete(productId)){
             return ResponseEntity.ok().build();
-
-        } else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

@@ -2,9 +2,11 @@ package mx.edtecdesoftware.edu.mx.demo.persistence.mapper;
 
 import mx.edtecdesoftware.edu.mx.demo.domain.dto.Purchase;
 import mx.edtecdesoftware.edu.mx.demo.persistence.entity.Compra;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import java.util.List;
 
@@ -21,9 +23,17 @@ public interface PurchaseMapper {
             @Mapping(source = "productos", target = "items")
     })
     Purchase toPurchase(Compra compra);
+
     List<Purchase> toPurchases(List<Compra> compras);
 
     @InheritInverseConfiguration
     @Mapping(target = "cliente", ignore = true)
     Compra toCompra(Purchase purchase);
+
+    @AfterMapping
+    default void linkProductos(@MappingTarget Compra compra) {
+        if (compra.getProductos() != null) {
+            compra.getProductos().forEach(producto -> producto.setCompra(compra));
+        }
+    }
 }

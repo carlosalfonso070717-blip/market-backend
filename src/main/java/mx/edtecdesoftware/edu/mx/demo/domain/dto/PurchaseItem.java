@@ -1,16 +1,16 @@
 package mx.edtecdesoftware.edu.mx.demo.domain.dto;
 
 public class PurchaseItem {
-    private int productId;
+    private Integer productId;
     private int quantity;
     private double total;
     private boolean active;
 
-    public int getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 

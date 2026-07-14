@@ -2,6 +2,7 @@ package mx.edtecdesoftware.edu.mx.demo.persistence.mapper;
 
 import mx.edtecdesoftware.edu.mx.demo.domain.service.Product;
 import mx.edtecdesoftware.edu.mx.demo.persistence.entity.Producto;
+import mx.edtecdesoftware.edu.mx.demo.persistence.entity.Categoria;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,20 +13,19 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {CategoryMapper.class})
 public interface ProductMapper {
 
-    @Mappings({
+    @Mappings(value = {
             @Mapping(source = "idProducto", target = "productId"),
             @Mapping(source = "nombre", target = "name"),
+            @Mapping(source = "idCategoria", target = "categoryId"),
             @Mapping(source = "precioVenta", target = "price"),
             @Mapping(source = "cantidadStock", target = "stock"),
             @Mapping(source = "estado", target = "active"),
-            @Mapping(source = "categoria", target = "category"),
-
+            @Mapping(source = "categoria", target = "category")
     })
     Product toProduct(Producto producto);
     List<Product> toProducts(List<Producto> productos);
 
     @InheritInverseConfiguration
-    @Mapping(target = "codigoBarras", ignore = true)
     Producto toProducto(Product product);
 }
 
