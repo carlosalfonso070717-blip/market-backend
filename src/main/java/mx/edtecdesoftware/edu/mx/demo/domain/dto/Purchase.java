@@ -1,7 +1,10 @@
 package mx.edtecdesoftware.edu.mx.demo.domain.dto;
 
+import jakarta.persistence.Entity;
+
 import java.time.LocalDateTime;
 import java.util.List;
+
 
 public class Purchase {
     // CAMBIO CLAVE: Usar Integer en lugar de int
